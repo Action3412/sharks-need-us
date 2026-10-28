@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Why sharks matter, why they are in trouble, and what you can do about it. A shark awareness site by Harriet Jackson.">
+<link rel="icon" type="image/png" href="img/logo-hammerhead.png">
+<meta property="og:title" content="Sharks Need Us">
+<meta property="og:description" content="Older than trees. Running out of time.">
+<meta property="og:image" content="https://sharksneedus.com/img/hero.jpg">
+<title>Sharks Need Us</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: a descent. Full-width bands get darker as you scroll from the surface to the deep, then rise back to light for the "what you can do" section. */
+:root{
+  --bg:#f2f6f7;
+  --bg-2:#e2ecef;
+  --surface:#ffffff;
+  --fg:#10242c;
+  --muted:#4f666e;
+  --line:#c9d8dd;
+  --accent:#0d6b8a;
+  --accent-2:#f0b35c;
+  --danger:#c2452b;
+  --ok:#2e8b5e;
+  --deep:#06232f;
+  --deep-fg:#e6f1f4;
+  --deep-muted:#9db7c0;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Lora",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a1b22;--bg-2:#0f262f;--surface:#132e38;--fg:#e6f1f4;--muted:#9db7c0;--line:#244852;
+    --accent:#5fc1df;--accent-2:#f3c377;--danger:#ff7a5c;--ok:#5ccf93;--deep:#03151d;--deep-fg:#e6f1f4;--deep-muted:#9db7c0;
+    color-scheme:dark
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a1b22;--bg-2:#0f262f;--surface:#132e38;--fg:#e6f1f4;--muted:#9db7c0;--line:#244852;
+  --accent:#5fc1df;--accent-2:#f3c377;--danger:#ff7a5c;--ok:#5ccf93;--deep:#03151d;--deep-fg:#e6f1f4;--deep-muted:#9db7c0;
+  color-scheme:dark
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.6rem,8vw,5.5rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800;letter-spacing:-.015em}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+.band{padding-block:4.5rem}
+.inner{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--display);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.lede{font-size:1.18rem;max-width:62ch;color:var(--muted)}
+.stack{display:grid;gap:1.1rem}
+.prose{max-width:66ch}
+.prose p + p{margin-top:1rem}
+svg{display:block;max-width:100%}
+
+/* logo bar */
+.logobar{padding-block:1.1rem;background:#06232f}
+.logobar-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.credit{font-family:var(--display);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9db7c0}
+.logo{display:flex;align-items:center;gap:1rem;text-decoration:none;color:#e6f1f4;width:fit-content}
+.logo img{height:52px;width:auto}
+.logo .lname{font-family:var(--display);font-weight:800;font-size:1.25rem;line-height:1;letter-spacing:-.02em;text-transform:uppercase}
+.logo .lname span{color:#5fc1df}
+.logo .lslogan{font-family:var(--body);font-style:italic;font-size:.82rem;color:#9db7c0;margin-top:.3rem}
+
+/* hero */
+.hero{background:linear-gradient(180deg,var(--bg-2),var(--bg));padding-block:2.5rem 3rem;overflow:hidden}
+.hero .inner{display:grid;gap:2.2rem}
+.hero-row{display:grid;gap:2rem;align-items:end}
+.hero-left{display:grid;gap:1.6rem;align-content:end}
+.hero-art{width:100%;height:auto;border-radius:6px;display:block}
+.hero-text{display:grid;gap:1.2rem;max-width:880px}
+.hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem 1.5rem}
+.stat{border-top:3px solid var(--accent);padding-top:.7rem}
+.stat b{display:block;font-family:var(--display);font-size:2.4rem;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.92rem;color:var(--muted)}
+
+/* words of the creator */
+.creator{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.creator .inner{display:grid;gap:1rem;max-width:760px}
+.creator blockquote{margin:0;font-family:var(--body);font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.55;font-style:italic}
+.creator blockquote::before{content:"\201C";display:block;font-family:var(--display);font-size:4rem;line-height:.6;color:var(--accent-2);margin-bottom:.4rem}
+.creator .sig{font-family:var(--display);font-weight:800;font-size:1.05rem;letter-spacing:-.01em}
+.creator .sig small{display:block;font-family:var(--body);font-weight:400;font-style:italic;font-size:.9rem;color:var(--muted);margin-top:.15rem}
+
+/* hero of the site: Steve Backshall (the one gold band) */
+.steve{background:linear-gradient(135deg,#f6c97a,var(--accent-2) 55%,#e9a847);color:#10242c;overflow:hidden;position:relative}
+.steve::before{content:"";position:absolute;inset:-40% -10% auto auto;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.45),rgba(255,255,255,0) 65%);pointer-events:none}
+.steve .inner{display:grid;gap:1.2rem;max-width:1080px;position:relative}
+.steve .eyebrow{color:#10242c;display:inline-flex;align-items:center;gap:.5rem}
+.steve .eyebrow::before{content:"";width:10px;height:10px;border-radius:50%;background:#10242c}
+@media (prefers-reduced-motion:no-preference){.steve .eyebrow::before{animation:blink 1.4s ease-in-out infinite}}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+.steve-grid{display:grid;gap:2rem;align-items:center}
+@media (min-width:860px){.steve-grid{grid-template-columns:1.2fr .8fr}}
+.steve blockquote{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,4vw,3rem);line-height:1.12;letter-spacing:-.02em;text-wrap:balance;color:#10242c}
+.steve blockquote::before{content:"\201C";color:#fff}
+.steve blockquote::after{content:"\201D";color:#fff}
+.steve cite{display:block;font-style:normal;font-family:var(--body);font-size:1rem;color:#3d3a2e;margin-top:.9rem}
+.steve cite b{font-family:var(--display);color:#10242c}
+.steve-card{background:#06232f;color:#e6f1f4;padding:1.6rem;border-radius:8px;display:grid;gap:.8rem;box-shadow:0 24px 50px rgba(0,0,0,.22);transform:rotate(-1.5deg);transition:transform .3s}
+.steve-card:hover{transform:rotate(0) translateY(-4px)}
+.steve-card img{max-width:100%;height:auto;max-height:110px;justify-self:center}
+.steve-card h3{color:#fff;font-size:1.3rem}
+.steve-card p{color:#9db7c0;font-size:1rem}
+.meet{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--display);font-weight:800;font-size:1.1rem;padding:.9rem 1.5rem;background:var(--accent-2);color:#10242c;text-decoration:none;border-radius:999px;width:fit-content;position:relative;box-shadow:0 0 0 0 rgba(240,179,92,.7);transition:transform .2s}
+.meet:hover{transform:translateY(-2px)}
+@media (prefers-reduced-motion:no-preference){.meet{animation:pulse 2s infinite}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(240,179,92,.7)}70%{box-shadow:0 0 0 16px rgba(240,179,92,0)}100%{box-shadow:0 0 0 0 rgba(240,179,92,0)}}
+.meet svg{width:18px;height:18px}
+
+/* why we need them */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.job{display:grid;grid-template-rows:150px auto 1fr;gap:.8rem;min-width:0;align-items:end}
+.job img{height:150px;width:auto;max-width:100%;object-fit:contain;object-position:left bottom;display:block}
+.job h3{align-self:start}
+.job p{align-self:start}
+
+/* deep band */
+.deep{background:var(--deep);color:var(--deep-fg)}
+.deep .eyebrow{color:var(--accent-2)}
+.deep .lede,.deep .muted{color:var(--deep-muted)}
+.chain{display:grid;gap:0;margin-top:2rem;max-width:720px}
+.link{display:grid;grid-template-columns:28px 1fr;gap:1rem;padding-block:1.1rem;border-top:1px solid rgba(255,255,255,.14);min-width:0}
+.link:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
+.link .dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--accent-2);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:.8rem;color:var(--accent-2);margin-top:.15rem}
+.link h3{color:var(--deep-fg)}
+.link p{color:var(--deep-muted);font-size:1rem}
+.casefile{margin-top:2.5rem;border-left:3px solid var(--accent-2);padding-left:1.2rem;max-width:66ch}
+.casefile .eyebrow{display:block;margin-bottom:.4rem}
+
+/* threats */
+.threats{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2rem}
+.threat{background:var(--surface);border:1px solid var(--line);padding:1.3rem;display:grid;gap:.5rem;min-width:0}
+.threat h3{display:flex;align-items:center;gap:.6rem}
+.threat .n{font-family:var(--display);color:var(--danger);font-weight:800;font-size:1.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.threat p{font-size:1rem;color:var(--muted)}
+.slow{margin-top:2.5rem;background:var(--bg-2);padding:1.5rem;display:grid;gap:1rem}
+.slow-rows{display:grid;gap:.5rem;font-family:var(--display);font-size:.95rem}
+.slow-row{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:.8rem;align-items:center;min-width:0}
+.bar{height:12px;background:var(--accent);border-radius:2px;position:relative}
+.bar::after{content:attr(data-label);position:absolute;left:calc(100% + .5rem);top:50%;transform:translateY(-50%);white-space:nowrap;font-size:.85rem;color:var(--muted)}
+
+/* species */
+.species{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-top:2rem}
+.card{background:var(--surface);border:1px solid var(--line);display:grid;grid-template-rows:auto 1fr;min-width:0}
+.card .art{background:var(--bg-2);aspect-ratio:16/9;max-width:100%;overflow:hidden}
+.card .art img{width:100%;height:100%;object-fit:cover;display:block}
+.card .body{padding:1rem 1.1rem 1.2rem;display:grid;gap:.4rem;align-content:start}
+.pill{font-family:var(--display);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .5rem;border-radius:3px;justify-self:start;color:#fff}
+.pill.cr{background:var(--danger)}
+.pill.en{background:#b8651c}
+.pill.vu{background:#8a7a17}
+.pill.lc{background:var(--ok)}
+.card p{font-size:.95rem;color:var(--muted)}
+
+/* help */
+.help{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+.act{display:grid;gap:.5rem;min-width:0;padding-top:1rem;border-top:3px solid var(--accent-2)}
+.act p{font-size:1rem;color:var(--muted)}
+.act ul{margin:.3rem 0 0;padding-left:1.1rem;font-size:1rem;color:var(--muted)}
+.act li+li{margin-top:.3rem}
+.orgs{margin-top:2.5rem;display:grid;gap:.6rem}
+.orgs a{font-family:var(--display);font-weight:700;text-decoration:none;border-bottom:2px solid currentColor}
+.orgs span{color:var(--muted);font-size:.95rem}
+
+/* quiz */
+.quiz{max-width:720px;margin-top:2rem;display:grid;gap:1.2rem}
+.qcard{background:var(--surface);border:1px solid var(--line);padding:1.5rem;display:grid;gap:1rem;min-width:0}
+.qcount{font-family:var(--display);font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-variant-numeric:tabular-nums}
+.qtext{font-family:var(--display);font-size:clamp(1.25rem,3vw,1.7rem);font-weight:700;line-height:1.25;text-wrap:balance}
+.qbtns{display:flex;gap:.75rem;flex-wrap:wrap}
+.qbtn{font-family:var(--display);font-weight:700;font-size:1.05rem;padding:.7rem 1.6rem;border:2px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;border-radius:4px}
+.qbtn:hover{background:var(--accent);color:var(--bg)}
+.qbtn[disabled]{opacity:.5;cursor:default}
+.qbtn.good[disabled],.qbtn.bad[disabled]{opacity:1}
+.qbtn.pick{background:var(--accent);color:var(--bg)}
+.verdict{display:grid;gap:.3rem;border-left:3px solid var(--line);padding-left:1rem}
+.verdict b{font-family:var(--display);font-size:1rem}
+.verdict.right{border-color:var(--ok)}.verdict.right b{color:var(--ok)}
+.verdict.wrong{border-color:var(--danger)}.verdict.wrong b{color:var(--danger)}
+.verdict p{font-size:1rem;color:var(--muted)}
+.qnext{justify-self:start;font-family:var(--display);font-weight:700;font-size:1rem;padding:.6rem 1.2rem;background:var(--accent-2);color:#10242c;border:0;cursor:pointer;border-radius:4px}
+.qbar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.qbar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.qscore{font-family:var(--display);font-size:clamp(2rem,6vw,3.2rem);font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.facts{display:grid;gap:0;margin-top:.5rem}
+.fact{display:grid;grid-template-columns:36px 1fr;gap:.9rem;padding-block:.9rem;border-top:1px solid var(--line);min-width:0}
+.fact:last-child{border-bottom:1px solid var(--line)}
+.fact .fn{font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--accent-2);line-height:1.2;font-variant-numeric:tabular-nums}
+.fact h3{font-size:1.05rem}
+.fact p{font-size:.98rem;color:var(--muted);margin-top:.15rem}
+
+/* ===== interactive layer ===== */
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.logobar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:#06232f}
+.progress{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--accent-2);transition:width .1s linear}
+.logobar{position:sticky}
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+/* hero extras */
+.hero{position:relative}
+.hero-art-wrap{position:relative;border-radius:6px;overflow:hidden;max-width:100%}
+.hero-art-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.22) 45%,rgba(255,255,255,0) 55%);transform:translateX(-120%);pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.hero-art-wrap::after{animation:ray 7s ease-in-out infinite}}
+@keyframes ray{0%{transform:translateX(-120%)}60%,100%{transform:translateX(120%)}}
+.hero-art{transform:scale(1.02)}
+@media (prefers-reduced-motion:no-preference){.hero-art{animation:breathe 12s ease-in-out infinite alternate}}
+@keyframes breathe{from{transform:scale(1.02)}to{transform:scale(1.08)}}
+.dive{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--display);font-weight:800;font-size:1.05rem;padding:.8rem 1.4rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:999px;width:fit-content;transition:transform .2s,box-shadow .2s}
+.dive:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(13,107,138,.3)}
+.dive svg{width:18px;height:18px}
+@media (prefers-reduced-motion:no-preference){.dive svg{animation:bob 1.6s ease-in-out infinite}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.bubbles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.hero .inner{position:relative;z-index:1}
+/* depth gauge */
+.gauge{position:fixed;right:max(14px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);z-index:40;display:none;flex-direction:column;align-items:center;gap:.4rem;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.9rem .7rem;box-shadow:0 6px 18px rgba(0,0,0,.12);font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+@media (min-width:1180px){.gauge{display:flex}}
+.gauge .track{width:4px;height:220px;background:var(--line);border-radius:2px;position:relative}
+.gauge .fill{position:absolute;left:0;top:0;width:100%;background:linear-gradient(180deg,var(--accent),var(--deep));border-radius:2px;height:0}
+.gauge .fin{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:22px;height:22px;transition:top .1s linear}
+.gauge .fin svg{width:22px;height:22px;display:block}
+.gauge b{font-size:1.1rem;color:var(--fg);font-variant-numeric:tabular-nums;letter-spacing:0;text-transform:none}
+/* why cards */
+@media (prefers-reduced-motion:no-preference){.job img{animation:swim 6s ease-in-out infinite alternate}.job:nth-child(2) img{animation-delay:-2s}.job:nth-child(3) img{animation-delay:-4s}}
+@keyframes swim{from{transform:translate(0,0) rotate(0)}to{transform:translate(8px,-6px) rotate(1.5deg)}}
+.job{transition:transform .25s}.job:hover{transform:translateY(-4px)}
+/* chain */
+.link{transition:opacity .6s,transform .6s}
+.link[hidden]{display:none}
+.link.pop{opacity:0;transform:translateX(-18px)}
+.link .dot{transition:background .4s,color .4s}
+.link.lit .dot{background:var(--accent-2);color:#06232f}
+.chainbtn{margin-top:1.2rem;font-family:var(--display);font-weight:800;font-size:1rem;padding:.75rem 1.3rem;background:var(--accent-2);color:#10242c;border:0;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:transform .2s}
+.chainbtn:hover{transform:translateY(-2px)}
+.casefile[hidden]{display:none}
+/* threats */
+.threat{cursor:pointer;text-align:left;font:inherit;color:inherit;transition:transform .25s,box-shadow .25s,border-color .25s;position:relative;width:100%}
+.threat:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(16,36,44,.12);border-color:var(--accent)}
+.threat .hint{font-family:var(--display);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.4rem}
+.threat .hint::before{content:"+";display:grid;place-items:center;width:18px;height:18px;border-radius:50%;border:2px solid currentColor;font-size:.9rem;line-height:1;transition:transform .3s}
+.threat.open .hint::before{content:"–";}
+.threat .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.7,.2,1)}
+.threat .more>p{overflow:hidden;min-height:0}
+.threat.open .more{grid-template-rows:1fr}
+.threat.open{border-color:var(--danger)}
+.threat.open .n{transform:scale(1.15)}
+.threat .n{display:inline-block;transition:transform .3s}
+.tracker{margin-top:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;font-family:var(--display);font-weight:700;font-size:.95rem}
+.tracker .pips{display:flex;gap:.35rem}
+.tracker .pip{width:26px;height:8px;border-radius:4px;background:var(--line);transition:background .4s}
+.tracker .pip.on{background:var(--danger)}
+.tracker .done{color:var(--ok)}
+/* slow bars */
+.bar{width:0!important;transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+.slow.go .bar{width:var(--w)!important}
+.bar::after{opacity:0;transition:opacity .4s 1.2s}
+.slow.go .bar::after{opacity:1}
+/* species flip */
+.card{perspective:1400px;background:transparent;border:0;display:block}
+.flip{position:relative;display:grid;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.7,.2,1);cursor:pointer}
+.flip>*{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip .front,.flip .back{background:var(--surface);border:1px solid var(--line);display:grid;grid-template-rows:auto 1fr;min-width:0}
+.flip .back{transform:rotateY(180deg);grid-template-rows:1fr;background:var(--deep);color:var(--deep-fg);border-color:var(--deep)}
+.card.flipped .flip{transform:rotateY(180deg)}
+.card:hover .flip{box-shadow:0 14px 30px rgba(16,36,44,.14)}
+.flip .back .body{padding:1.2rem 1.1rem}
+.flip .back p{color:var(--deep-muted)}
+.flip .back h3{color:var(--deep-fg)}
+.flip .back .big{font-family:var(--display);font-weight:800;font-size:2.2rem;line-height:1;color:var(--accent-2);margin-bottom:.4rem}
+.flip .tap{font-family:var(--display);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:.5rem}
+.flip .back .tap{color:var(--accent-2)}
+.card.rec .front{border-color:var(--ok)}
+@media (prefers-reduced-motion:reduce){.flip{transition:none}}
+/* quiz game */
+.quiz{position:relative}
+.qcard{position:relative;overflow:hidden;transition:transform .35s,box-shadow .35s,border-color .35s}
+.qcard.enter{animation:slidein .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes slidein{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+.qcard.right{border-color:var(--ok);box-shadow:0 0 0 4px rgba(46,139,94,.18)}
+.qcard.wrong{border-color:var(--danger);animation:shake .5s}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
+@media (prefers-reduced-motion:reduce){.qcard.enter,.qcard.wrong{animation:none}}
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.streak{font-family:var(--display);font-weight:800;font-size:.85rem;padding:.25rem .6rem;border-radius:999px;background:var(--bg-2);color:var(--muted);transition:transform .3s,background .3s,color .3s}
+.streak.hot{background:var(--accent-2);color:#10242c;transform:scale(1.08)}
+.timer{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.timer i{display:block;height:100%;width:100%;background:var(--accent);transform-origin:left;transition:transform 1s linear,background .3s}
+.timer.low i{background:var(--danger)}
+.qbtn{position:relative;overflow:hidden;transition:transform .15s,background .2s,color .2s}
+.qbtn:active{transform:scale(.96)}
+.qbtn.pick{background:var(--accent);color:var(--bg)}
+.qbtn.good{background:var(--ok);border-color:var(--ok);color:#fff}
+.qbtn.bad{background:var(--danger);border-color:var(--danger);color:#fff}
+.pips10{display:flex;gap:.3rem;flex-wrap:wrap}
+.pips10 i{width:20px;height:8px;border-radius:4px;background:var(--line);transition:background .4s}
+.pips10 i.ok{background:var(--ok)}.pips10 i.no{background:var(--danger)}
+.qstart{display:grid;gap:1rem;justify-items:start}
+.qstart .big{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.1}
+.qstart ul{margin:0;padding-left:1.1rem;color:var(--muted);font-size:1rem}
+.ring{width:150px;height:150px;position:relative;display:grid;place-items:center}
+.ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:10}
+.ring .bgc{stroke:var(--line)}
+.ring .qscore{font-size:1.9rem}
+.ring .fgc{stroke:var(--accent-2);stroke-linecap:round;stroke-dasharray:408;stroke-dashoffset:408;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1)}
+.rank{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,4vw,2.2rem);line-height:1.1;color:var(--accent)}
+.resgrid{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center}
+@media (max-width:520px){.resgrid{grid-template-columns:1fr}}
+.fact{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+.fact.show{opacity:1;transform:none}
+.fact[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.fact{opacity:1;transform:none;transition:none}}
+.qrow{display:flex;gap:.75rem;flex-wrap:wrap}
+.qghost{font-family:var(--display);font-weight:700;font-size:1rem;padding:.6rem 1.2rem;background:transparent;color:var(--accent);border:2px solid var(--accent);cursor:pointer;border-radius:4px}
+.confetti{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.scorepop{position:absolute;right:1.2rem;top:1rem;font-family:var(--display);font-weight:800;color:var(--ok);font-size:1.4rem;opacity:0;pointer-events:none}
+.scorepop.go{animation:pop 1s ease-out}
+@keyframes pop{0%{opacity:0;transform:translateY(10px) scale(.6)}20%{opacity:1;transform:translateY(0) scale(1.15)}100%{opacity:0;transform:translateY(-30px) scale(1)}}
+/* pledges */
+.act li{list-style:none;position:relative;padding-left:2rem;cursor:pointer;transition:color .3s}
+.act ul{padding-left:0}
+.act li::before{content:"";position:absolute;left:0;top:.25em;width:20px;height:20px;border:2px solid var(--accent);border-radius:5px;background:var(--surface);transition:background .25s,border-color .25s}
+.act li::after{content:"";position:absolute;left:7px;top:.3em;width:5px;height:11px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) scale(0);transition:transform .25s}
+.act li.on::before{background:var(--ok);border-color:var(--ok)}
+.act li.on::after{transform:rotate(45deg) scale(1)}
+.act li.on{color:var(--fg)}
+.act li:hover::before{border-color:var(--ok)}
+.pledge{margin-top:2rem;background:var(--surface);border:1px solid var(--line);padding:1.3rem 1.5rem;display:grid;gap:.6rem}
+.pledge .pbar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.pledge .pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--ok));transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.pledge b{font-family:var(--display);font-size:1.2rem}
+.pledge .msg{color:var(--muted);font-size:1rem}
+/* back to top */
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:40;width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;border:0;display:grid;place-items:center;cursor:pointer;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.totop.show{opacity:1;transform:none}
+.totop svg{width:22px;height:22px}
+@media (min-width:1180px){.totop{right:max(16px,env(safe-area-inset-right,0px))}.gauge{right:max(28px,env(safe-area-inset-right,0px))}}
+
+/* bubbles everywhere */
+.sea{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.burst{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:70}
+.band,.creator,.steve,.hero,footer{position:relative;z-index:1}
+.deep{overflow:hidden}
+.deepsea{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.deep .inner{position:relative;z-index:1}
+.hero{z-index:1}
+
+footer{padding-block:2.5rem 3rem;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+footer ol{padding-left:1.2rem;margin:.5rem 0 0}
+footer li+li{margin-top:.25rem}
+
+@media (min-width:760px){
+  .hero-row{grid-template-columns:1fr 1.15fr;align-items:end}
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero-art .shark{animation:drift 14s ease-in-out infinite alternate}
+  @keyframes drift{from{transform:translate(0,0)}to{transform:translate(-18px,8px)}}
+}
+:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="logobar"><div class="inner logobar-inner"><a class="logo" href="#top"><img src="img/logo-hammerhead.png" alt="Scalloped hammerhead shark"><div><div class="lname">Sharks Need <span>Us</span></div><div class="lslogan">Older than trees. Running out of time.</div></div></a><div class="credit">Created by Harriet Jackson</div></div><div class="progress" id="progress"></div></div>
+
+<header class="hero" id="top">
+  <canvas class="bubbles" id="bubbles" aria-hidden="true"></canvas>
+  <div class="inner">
+    <div class="hero-text">
+      <span class="eyebrow">Older than trees. Running out of time.</span>
+      <h1>Sharks need us way more than we ever needed to be scared of them.</h1>
+      <p class="lede">Sharks have been swimming around for over 400 million years. They've survived five mass extinctions. The sixth one is us, and it might be the first one they don't get through.</p>
+    </div>
+    <div class="hero-row">
+      <div class="hero-left">
+        <div class="hero-stats">
+          <div class="stat"><b data-count="3" data-prefix="1 in ">1 in 3</b><span>shark and ray species are at risk of extinction</span></div>
+          <div class="stat"><b data-count="100" data-prefix="~" data-suffix="m">~100m</b><span>sharks killed by people every single year</span></div>
+          <div class="stat"><b data-count="71" data-suffix="%">71%</b><span>fewer open ocean sharks than in 1970</span></div>
+          <div class="stat"><b data-count="5" data-prefix="~">~5</b><span>people killed by sharks in a normal year, in the whole world</span></div>
+        </div>
+        <a class="dive" href="#dive">Dive in <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a>
+      </div>
+      <div class="hero-art-wrap"><img class="hero-art" src="img/hero.jpg" alt="A reef shark swimming over a coral reef with sunlight streaming down from the surface"></div>
+    </div>
+  </div>
+</header>
+
+<section class="band creator" id="dive">
+  <div class="inner">
+    <span class="eyebrow">Words of the creator</span>
+    <blockquote>I've loved sharks for 3 whole years now, and this website may only be new and a little messy, but it's always been a dream of mine to help raise awareness for them and tell people what's actually going on in the sharks vs human ocean world. All I ever wanted was for sharks to live their lives in peace, and for them to get the heck off the menu.</blockquote>
+    <div class="sig">Harriet Jackson<small>Creator, Sharks Need Us</small></div>
+  </div>
+</section>
+
+<section class="band steve" id="steve">
+  <div class="inner">
+    <span class="eyebrow">My hero</span>
+    <div class="steve-grid">
+      <div>
+        <blockquote>Human beings will only ever look after the things they value. Our first battle then is to convince the world of the wonder of sharks.</blockquote><cite><b>Steve Backshall</b>, on becoming patron of the shark charity Bite-Back, 2016</cite>
+      </div>
+      <div class="steve-card">
+        <img src="img/why-diver.png" alt="A diver swimming beside a reef shark">
+        <h3>The man who made me love sharks</h3>
+        <p>Deadly 60 presenter, explorer, and the person who got in the water with a great white with no cage and came out saying it was beautiful. He's the reason this website exists.</p>
+        <a class="meet" href="steve.html">Meet my hero <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner stack">
+    <span class="eyebrow">Why we need them</span>
+    <h2>A healthy ocean has sharks in it. That's not a coincidence.</h2>
+    <p class="lede">Sharks are right at the top of the food chain, and the top is what holds everything else in place. Take them away and it messes things up all the way down to the seagrass. Here's how.</p>
+    <div class="grid3" style="margin-top:1.5rem">
+      <div class="job">
+        <img src="img/why-shoal.png" alt="A shoal of sardines">
+        <h3>They keep other fish healthy</h3>
+        <p>Sharks go for the slow, sick and old fish first, because they're the easiest to catch. That sounds harsh but it stops diseases spreading through a whole shoal and keeps the rest of the fish strong. No other animal does this job on anything like the same scale.</p>
+      </div>
+      <div class="job">
+        <img src="img/why-turtle.png" alt="A green sea turtle over seagrass">
+        <h3>They protect reefs and seagrass</h3>
+        <p>Turtles, dugongs and parrotfish all eat less and keep moving when there are sharks about. Scientists actually call it a "landscape of fear", which I think is a brilliant name. It means no one patch of seagrass or reef gets munched down to nothing. And seagrass stores carbon faster than rainforests do, so this matters for climate change too.</p>
+      </div>
+      <div class="job">
+        <img src="img/why-diver.png" alt="A diver swimming beside a reef shark">
+        <h3>They're worth more alive</h3>
+        <p>Here's a fact that surprised me. One reef shark in Palau is worth nearly $2 million over its life because of all the divers who pay to see it. Dead, it's worth a few hundred dollars. Whole towns in Mexico, the Philippines and Australia make their living from people coming to swim with whale sharks. Sharks make money when they stay in the water.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band deep">
+  <canvas class="deepsea" id="deepsea" aria-hidden="true"></canvas>
+  <div class="inner">
+    <span class="eyebrow">What happens without them</span>
+    <h2 style="margin-top:.6rem">Pull out the top of the food chain and watch everything go wrong.</h2>
+    <p class="lede" style="margin-top:1rem">Scientists call this a trophic cascade. Basically it's a chain reaction. This is what tends to happen when the sharks disappear from a bit of coast.</p>
+    <div class="chain" id="chain">
+      <div class="link lit"><div class="dot">1</div><div><h3>Sharks are fished out</h3><p>Longlines, nets and finning wipe out the big sharks in an area over ten or twenty years. Sharks have babies really slowly, so they can't bounce back the way sardines can.</p></div></div>
+      <div class="link" hidden><div class="dot">2</div><div><h3>The middle of the food chain explodes</h3><p>Rays, skates, groupers and small sharks that used to get eaten now don't. So there are suddenly loads of them, sometimes ten times as many.</p></div></div>
+      <div class="link" hidden><div class="dot">3</div><div><h3>Shellfish and grazers get hammered</h3><p>All those extra rays are hungry. Scallops, clams and oysters get wiped out. In other places, with no sharks to keep them moving, grazers strip the seagrass bare, and when the algae-eating fish go the reefs get covered in slime.</p></div></div>
+      <div class="link" hidden><div class="dot">4</div><div><h3>And then people pay for it</h3><p>Fishermen lose their shellfish. Reefs stop growing and stop protecting the coast from storms. The seagrass that was storing carbon dies. And people who never cared about sharks suddenly notice they're gone.</p></div></div>
+    </div>
+    <button class="chainbtn" id="chainbtn" type="button">So what happens next? <span aria-hidden="true">&rarr;</span></button>
+    <div class="casefile" id="casefile" hidden>
+      <span class="eyebrow">It's already happened</span>
+      <p class="muted">This isn't a theory. Off the east coast of America, big sharks like hammerheads and bull sharks dropped by over 90% in the 1980s and 90s. Cownose rays, which those sharks used to eat, went crazy. The rays ate all the scallops, and in 2004 a scallop fishery in North Carolina that had been going for a hundred years had to shut down. And on reefs in the Pacific, the ones that still have their sharks have loads more fish overall than the ones where the sharks have been fished out.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner">
+    <span class="eyebrow">Why they're endangered</span>
+    <h2 style="margin-top:.6rem">It's mostly one thing, and I'm afraid it's us.</h2>
+    <p class="lede" style="margin-top:1rem">Sharks aren't disappearing because of some mystery ocean problem. Around a hundred million of them get pulled out of the sea every year, and they just can't have babies fast enough to keep up with that.</p>
+    <div class="threats">
+      <button class="threat" type="button" aria-expanded="false"><h3><span class="n">01</span>Overfishing</h3><span class="hint">Tap to uncover</span><div class="more"><p>Sharks get caught on purpose for their meat, fins, liver oil and cartilage. Some boats go after them specifically. Others catch them "by accident" in massive numbers and keep them anyway. This is the number one reason nearly every threatened shark is threatened.</p></div></button>
+      <button class="threat" type="button" aria-expanded="false"><h3><span class="n">02</span>Finning</h3><span class="hint">Tap to uncover</span><div class="more"><p>The fins are the expensive bit, so on lots of boats they cut the fins off and chuck the shark back in the sea while it's still alive. It sinks and drowns. Lots of countries have banned this now, but there's hardly anyone out at sea checking, and the fin trade is still worth hundreds of millions a year.</p></div></button>
+      <button class="threat" type="button" aria-expanded="false"><h3><span class="n">03</span>Bycatch</h3><span class="hint">Tap to uncover</span><div class="more"><p>Longlines for tuna and swordfish can be miles and miles long with thousands of hooks on them. Sharks bite the hooks too. Oceanic whitetips and silky sharks used to be some of the most common big animals on Earth, and they were pushed nearly to extinction mostly by being caught by accident like this.</p></div></button>
+      <button class="threat" type="button" aria-expanded="false"><h3><span class="n">04</span>Losing their nurseries</h3><span class="hint">Tap to uncover</span><div class="more"><p>Lots of sharks have their pups in mangroves, river mouths and shallow reefs. When those get ripped out for prawn farms, ports or houses, the baby sharks have nowhere safe to grow up.</p></div></button>
+      <button class="threat" type="button" aria-expanded="false"><h3><span class="n">05</span>A warmer, dirtier sea</h3><span class="hint">Tap to uncover</span><div class="more"><p>Warmer water pushes sharks into new places and away from the food they normally eat. Microplastics and metals build up inside animals that live a long time, and sharks live a long time. Neither of these kills a shark quickly, but they both make life harder for sharks that are already struggling.</p></div></button>
+      <button class="threat" type="button" aria-expanded="false"><h3><span class="n">06</span>People being scared of them</h3><span class="hint">Tap to uncover</span><div class="more"><p>Shark nets, drum lines and culls kill thousands of sharks a year just to make beaches feel safer, and they catch turtles, dolphins and rays too. I get that people are scared. But the actual risk is tiny. You're far more likely to be killed by a cow. Seriously, look it up.</p></div></button>
+    </div>
+    <div class="tracker" id="tracker"><span class="pips"><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i></span><span id="trackertext">0 of 6 uncovered</span></div>
+
+    <div class="slow" id="slow">
+      <h3>The big problem: sharks live like whales but get fished like sardines</h3>
+      <p style="color:var(--muted);max-width:66ch">Most fish lay millions of eggs and are grown up in a year or two. Sharks grow slowly, take ages to grow up, and only have a few pups at a time, sometimes only every other year. If you take out too many adults there's no quick way back. Here's how many years it takes different animals to be old enough to have babies:</p>
+      <div class="slow-rows">
+        <div class="slow-row"><span>Sardine</span><div class="bar" style="--w:1.3%;width:1.3%" data-label="1 to 2 yrs"></div></div>
+        <div class="slow-row"><span>Blacktip reef shark</span><div class="bar" style="--w:5.3%;width:5.3%" data-label="8 yrs"></div></div>
+        <div class="slow-row"><span>Great white</span><div class="bar" style="--w:20%;width:20%" data-label="~30 yrs (females)"></div></div>
+        <div class="slow-row"><span>Greenland shark</span><div class="bar" style="--w:66%;width:66%" data-label="~150 yrs"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="background:var(--bg-2)">
+  <div class="inner">
+    <span class="eyebrow">Meet some of them</span>
+    <h2 style="margin-top:.6rem">Six sharks in trouble, and one that came back.</h2>
+    <div class="species">
+      <div class="card"><div class="flip" role="button" tabindex="0" aria-label="Great hammerhead, tap to flip"><div class="front"><div class="art"><img src="img/hammerhead.jpg" alt="Great hammerhead shark over a sandy seabed" loading="lazy"></div><div class="body"><span class="pill cr">Critically endangered</span><h3>Great hammerhead</h3><span class="tap">Tap to flip</span></div></div><div class="back"><div class="body"><div class="big">80%</div><h3>population lost in three generations</h3><p>That wide head is full of sensors that can feel the heartbeat of a stingray hiding under the sand. Its huge fins are worth a lot of money, and it's lost over 80% of its population in just three generations.</p><span class="tap">Tap to flip back</span></div></div></div></div>
+      <div class="card"><div class="flip" role="button" tabindex="0" aria-label="Oceanic whitetip, tap to flip"><div class="front"><div class="art"><img src="img/whitetip.jpg" alt="Oceanic whitetip shark in open blue water" loading="lazy"></div><div class="body"><span class="pill cr">Critically endangered</span><h3>Oceanic whitetip</h3><span class="tap">Tap to flip</span></div></div><div class="back"><div class="body"><div class="big">98%</div><h3>gone from some oceans</h3><p>This used to be called the most common big animal on the whole planet. Decades of getting caught on longlines have cut it by about 98% in some oceans. You can tell it by its rounded fins with white tips.</p><span class="tap">Tap to flip back</span></div></div></div></div>
+      <div class="card"><div class="flip" role="button" tabindex="0" aria-label="Whale shark, tap to flip"><div class="front"><div class="art"><img src="img/whaleshark.jpg" alt="Whale shark near the surface showing its spot pattern" loading="lazy"></div><div class="body"><span class="pill en">Endangered</span><h3>Whale shark</h3><span class="tap">Tap to flip</span></div></div><div class="back"><div class="body"><div class="big">18 m</div><h3>long, and eats plankton</h3><p>The biggest fish in the sea, up to 18 metres long, and all it eats is plankton. Every single one has its own pattern of spots, like a fingerprint. It gets hit by ships, caught by fishing boats and killed for its fins.</p><span class="tap">Tap to flip back</span></div></div></div></div>
+      <div class="card"><div class="flip" role="button" tabindex="0" aria-label="Sawfish, tap to flip"><div class="front"><div class="art"><img src="img/sawfish.jpg" alt="Largetooth sawfish resting on the seabed" loading="lazy"></div><div class="body"><span class="pill cr">Critically endangered</span><h3>Sawfish</h3><span class="tap">Tap to flip</span></div></div><div class="back"><div class="body"><div class="big">Gone</div><h3>from most of the Atlantic</h3><p>Technically a ray, but a really close cousin of sharks. That saw gets hopelessly tangled in fishing nets. It's already gone from loads of places it used to live. The largetooth sawfish has disappeared from most of the Atlantic.</p><span class="tap">Tap to flip back</span></div></div></div></div>
+      <div class="card"><div class="flip" role="button" tabindex="0" aria-label="Angelshark, tap to flip"><div class="front"><div class="art"><img src="img/angelshark.jpg" alt="Angelshark half-buried in sand" loading="lazy"></div><div class="body"><span class="pill cr">Critically endangered</span><h3>Angelshark</h3><span class="tap">Tap to flip</span></div></div><div class="back"><div class="body"><div class="big">UK</div><h3>used to be common here</h3><p>Flat, sandy coloured and almost impossible to spot on the seabed. It used to be common around Britain! Bottom trawling scoops it up by accident. Now it's mostly hanging on around the Canary Islands and a few bays in Wales.</p><span class="tap">Tap to flip back</span></div></div></div></div>
+      <div class="card"><div class="flip" role="button" tabindex="0" aria-label="Pelagic thresher, tap to flip"><div class="front"><div class="art"><img src="img/thresher.jpg" alt="Pelagic thresher shark with its long tail" loading="lazy"></div><div class="body"><span class="pill vu">Vulnerable</span><h3>Pelagic thresher</h3><span class="tap">Tap to flip</span></div></div><div class="back"><div class="body"><div class="big">50%</div><h3>fewer in two generations</h3><p>Its tail is as long as its whole body, and it whips it round to stun sardines. Which is awesome. But that long tail also gets snagged on longlines, and thresher numbers have roughly halved in two generations.</p><span class="tap">Tap to flip back</span></div></div></div></div>
+      <div class="card rec"><div class="flip" role="button" tabindex="0" aria-label="Great white (US Atlantic), tap to flip"><div class="front"><div class="art"><img src="img/greatwhite.jpg" alt="Great white shark near the surface" loading="lazy"></div><div class="body"><span class="pill lc">Recovering</span><h3>Great white (US Atlantic)</h3><span class="tap">Tap to flip</span></div></div><div class="back"><div class="body"><div class="big">1997</div><h3>protected, and back</h3><p>Protected in American waters since 1997. Seals have come back too, so great whites are now back around Cape Cod and up the Atlantic coast in numbers nobody's seen for decades. Which proves it. Stop killing them and they come back.</p><span class="tap">Tap to flip back</span></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="quiz">
+  <div class="inner">
+    <span class="eyebrow">Test yourself</span>
+    <h2 style="margin-top:.6rem">True or false? Ten quick ones.</h2>
+    <p class="lede" style="margin-top:1rem">Most of what people "know" about sharks comes from films. Let's see how much of it is actually true.</p>
+    <div class="quiz" id="quizbox">
+      <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+      <div class="qcard qstart" id="qstart">
+        <div class="big">Reckon you know sharks?</div>
+        <ul><li>10 questions, true or false</li><li>12 seconds each, so don't dawdle</li><li>Get a streak going for bonus bragging rights</li></ul>
+        <button class="qnext" id="qgo" type="button">Start the quiz</button>
+      </div>
+      <div class="qcard" id="qcard" hidden>
+        <div class="scorepop" id="scorepop">+1</div>
+        <div class="qtop"><div class="qcount" id="qcount">Question 1 of 10</div><div class="streak" id="streak">Streak 0</div></div>
+        <div class="pips10" id="pips"></div>
+        <div class="timer" id="timer"><i id="timerbar"></i></div>
+        <div class="qtext" id="qtext"></div>
+        <div class="qbtns"><button class="qbtn" id="qtrue" type="button">True</button><button class="qbtn" id="qfalse" type="button">False</button></div>
+        <div class="verdict" id="qverdict" hidden><b id="qvb"></b><p id="qvp"></p></div>
+        <button class="qnext" id="qnext" type="button" hidden>Next question</button>
+      </div>
+      <div class="qcard" id="qresult" hidden>
+        <div class="resgrid">
+          <div class="ring"><svg viewBox="0 0 150 150"><circle class="bgc" cx="75" cy="75" r="65"/><circle class="fgc" id="ringfg" cx="75" cy="75" r="65"/></svg><div class="qscore" id="qscore">0</div></div>
+          <div><div class="qcount">Your rank</div><div class="rank" id="qrank"></div><p id="qsummary" style="color:var(--muted);margin-top:.4rem"></p></div>
+        </div>
+        <h3 style="margin-top:.5rem">Seven fun facts to help you save sharks</h3>
+        <div class="facts">
+          <div class="fact" hidden><span class="fn">1</span><div><h3>Sharks are older than trees</h3><p>They've been around for about 450 million years. Trees only turned up about 350 million years ago. Saturn's rings might be younger than sharks! Losing them now would end one of the longest success stories on Earth.</p></div></div>
+          <div class="fact" hidden><span class="fn">2</span><div><h3>Most sharks are smaller than you</h3><p>There are over 500 kinds of shark and more than half of them are under a metre long. The dwarf lanternshark fits in your hand. The giant man-eater from the films is a tiny minority, and it mostly eats seals anyway.</p></div></div>
+          <div class="fact" hidden><span class="fn">3</span><div><h3>Sharks do get cancer, whatever the pills say</h3><p>The idea that sharks never get cancer was made up to sell shark cartilage pills. They do get tumours. The pills do nothing for you, and buying them kills sharks.</p></div></div>
+          <div class="fact" hidden><span class="fn">4</span><div><h3>A shark can sense your heartbeat</h3><p>Little pores on their snout pick up the tiny electrical signals that every living muscle gives off. That's how a hammerhead finds a ray buried in sand. It's also why sharks sometimes bite metal things. Metal feels electrical to them. It's not because they want to eat you.</p></div></div>
+          <div class="fact" hidden><span class="fn">5</span><div><h3>Some sharks walk, glow or live for centuries</h3><p>Epaulette sharks walk across reefs on their fins. Lanternsharks glow in the dark. Greenland sharks can live past 400 years, so some of them alive right now were born before the Great Fire of London. I think about that a lot.</p></div></div>
+          <div class="fact" hidden><span class="fn">6</span><div><h3>You've probably eaten shark without knowing</h3><p>"Rock salmon", "huss" and "flake" on a chip shop board are all shark. Squalene in skincare is often shark liver oil. Reading labels is honestly one of the easiest things you can do.</p></div></div>
+          <div class="fact" hidden><span class="fn">7</span><div><h3>Sharks come back when we let them</h3><p>Great whites are coming back to the east coast of America now they're protected. Grey nurse sharks are slowly recovering in Australia. Some beaches have swapped shark nets for drones and alarms. None of it took a miracle. It just took people deciding it mattered.</p></div></div>
+        </div>
+        <div class="qrow"><button class="qnext" id="qfact" type="button">Show me a fact</button><button class="qghost" id="qcopy" type="button">Copy my score</button><button class="qghost" id="qagain" type="button">Try again</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var MASTER=[
+    ["Sharks have been on Earth longer than trees.",true,"Sharks turned up about 450 million years ago. Trees didn't show up until about 100 million years after that."],
+    ["Sharks kill more people each year than cows do.",false,"Sharks kill about five people a year in the whole world. Cows kill about 20 a year in America alone. Falling coconuts, vending machines and selfies all have a worse record than sharks."],
+    ["Most shark species are less than a metre long.",true,"Over half of all shark species are under a metre long. The dwarf lanternshark is about 20 cm, about the length of a pencil."],
+    ["A shark has to keep swimming or it will die.",false,"Some open ocean sharks do have to keep moving to push water over their gills, but loads of species, like nurse sharks and angelsharks, lie on the seabed and pump the water themselves."],
+    ["Sharks can detect the electrical field of a beating heart.",true,"Jelly-filled pores on the snout, called ampullae of Lorenzini (great name), pick up tiny electrical signals from muscles. Hammerheads use them to find rays buried in the sand."],
+    ["Sharks never get cancer.",false,"They do. The myth was made up to sell shark cartilage pills, which don't work and get sharks killed."],
+    ["A third of all shark and ray species are threatened with extinction.",true,"The big global survey in 2021 put it at 37%. For some groups, like open ocean sharks, it's way worse."],
+    ["Great white sharks mainly hunt humans.",false,"They mostly eat seals, sea lions and fish. Most bites on people are one test bite and then the shark swims off, which is not what a predator does with something it actually wants to eat."],
+    ["Some sharks can live for more than 400 years.",true,"The Greenland shark lives longer than any other animal with a backbone. One studied in 2016 was thought to be nearly 400 years old, give or take a hundred years."],
+    ["It's illegal to sell shark in UK fish and chip shops.",false,"It's totally legal, and really common. Spiny dogfish gets sold as rock salmon or huss. Bringing shark fins into the UK was banned in 2023, but shark meat wasn't."]
+  ];
+  var Q=MASTER.slice();
+  function shuffle(){Q=MASTER.slice();for(var a=Q.length-1;a>0;a--){var b=Math.floor(Math.random()*(a+1)),t=Q[a];Q[a]=Q[b];Q[b]=t}
+    /* never let it alternate perfectly or run more than 3 the same in a row */
+    var alt=true,run=1;for(var c=1;c<Q.length;c++){if(Q[c][1]===Q[c-1][1]){alt=false;run++;if(run>3)return shuffle()}else run=1}
+    if(alt)return shuffle()}
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(id){return document.getElementById(id)};
+  var i=0,score=0,streak=0,best=0,answered=false,tick=null,timeLeft=12,results=[];
+  var qtext=$('qtext'),qcount=$('qcount'),bt=$('qtrue'),bf=$('qfalse'),nx=$('qnext');
+  var v=$('qverdict'),vb=$('qvb'),vp=$('qvp'),card=$('qcard'),res=$('qresult'),start=$('qstart');
+  var pips=$('pips'),timer=$('timer'),timerbar=$('timerbar'),streakEl=$('streak'),pop=$('scorepop');
+  for(var k=0;k<Q.length;k++){var d=document.createElement('i');pips.appendChild(d)}
+  function setStreak(){streakEl.textContent='Streak '+streak;streakEl.classList.toggle('hot',streak>=3)}
+  function stopTimer(){if(tick){clearInterval(tick);tick=null}}
+  function startTimer(){
+    timeLeft=12;timer.classList.remove('low');timerbar.style.transition='none';timerbar.style.transform='scaleX(1)';
+    void timerbar.offsetWidth;timerbar.style.transition='transform 1s linear,background .3s';
+    tick=setInterval(function(){
+      timeLeft--;timerbar.style.transform='scaleX('+(timeLeft/12)+')';
+      if(timeLeft<=4)timer.classList.add('low');
+      if(timeLeft<=0){stopTimer();timeout()}
+    },1000);
+  }
+  function show(){
+    answered=false;qtext.textContent=Q[i][0];qcount.textContent='Question '+(i+1)+' of '+Q.length;
+    bt.disabled=false;bf.disabled=false;bt.className='qbtn';bf.className='qbtn';
+    card.classList.remove('right','wrong');v.hidden=true;nx.hidden=true;nx.textContent=i===Q.length-1?'See my score':'Next question';
+    card.classList.remove('enter');void card.offsetWidth;card.classList.add('enter');
+    startTimer();
+  }
+  function finish(ok,label){
+    answered=true;stopTimer();bt.disabled=true;bf.disabled=true;
+    results[i]=ok;pips.children[i].className=ok?'ok':'no';
+    if(ok){score++;streak++;best=Math.max(best,streak);card.classList.add('right');burst(24);pop.classList.remove('go');void pop.offsetWidth;pop.classList.add('go')}
+    else{streak=0;card.classList.add('wrong')}
+    setStreak();
+    v.className='verdict '+(ok?'right':'wrong');v.hidden=false;
+    vb.textContent=label+(Q[i][1]?' It\u2019s true.':' It\u2019s false.');
+    vp.textContent=Q[i][2];nx.hidden=false;nx.focus();
+  }
+  function answer(a){
+    if(answered)return;
+    var ok=a===Q[i][1];
+    (a?bt:bf).classList.add(ok?'good':'bad');
+    (Q[i][1]?bt:bf).classList.add('good');
+    finish(ok, ok?(streak>=2?'Yes! On fire.':'Yes!'):'Nope.');
+  }
+  function timeout(){
+    if(answered)return;
+    (Q[i][1]?bt:bf).classList.add('good');
+    finish(false,'Too slow!');
+  }
+  bt.addEventListener('click',function(){answer(true)});
+  bf.addEventListener('click',function(){answer(false)});
+  document.addEventListener('keydown',function(e){
+    if(card.hidden||answered)return;
+    if(e.key==='t'||e.key==='T'||e.key==='ArrowLeft')answer(true);
+    if(e.key==='f'||e.key==='F'||e.key==='ArrowRight')answer(false);
+  });
+  $('qgo').addEventListener('click',function(){shuffle();start.hidden=true;card.hidden=false;i=0;score=0;streak=0;best=0;results=[];setStreak();for(var k=0;k<pips.children.length;k++)pips.children[k].className='';show()});
+  nx.addEventListener('click',function(){
+    i++;
+    if(i<Q.length){show();return;}
+    card.hidden=true;res.hidden=false;showResult();
+    res.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
+  });
+  var factIdx=0,facts=res.querySelectorAll('.fact');
+  function showResult(){
+    var ring=$('ringfg'),sc=$('qscore');
+    var rank=score>=9?'Apex Predator':score>=7?'Reef Patrol':score>=5?'Shark Pup':'Landlubber';
+    $('qrank').textContent=rank;
+    var m=score>=9?'Full marks, or near enough. You properly know your sharks.':score>=7?'Really good. The films got you once or twice but you know the real story.':score>=5?'Not bad! A few myths got through. Read the facts below and you\u2019ll be unstoppable.':'The films won this round. Have a read of the facts and come back for revenge.';
+    if(best>=5)m+=' Best streak: '+best+' in a row.';
+    $('qsummary').textContent=m;
+    factIdx=0;for(var k=0;k<facts.length;k++){facts[k].hidden=true;facts[k].classList.remove('show')}
+    $('qfact').hidden=false;$('qfact').textContent='Show me a fact';
+    var n=0;sc.textContent='0';ring.style.strokeDashoffset=408;
+    setTimeout(function(){ring.style.strokeDashoffset=408-408*(score/Q.length)},50);
+    if(RM){sc.textContent=score+'/'+Q.length;return}
+    var iv=setInterval(function(){n++;sc.textContent=n+'/'+Q.length;if(n>=score){clearInterval(iv);if(score>=8)burst(80)}},120);
+  }
+  $('qfact').addEventListener('click',function(){
+    if(factIdx<facts.length){var f=facts[factIdx];f.hidden=false;void f.offsetWidth;f.classList.add('show');factIdx++;
+      if(RM===false)f.scrollIntoView({behavior:'smooth',block:'nearest'});}
+    if(factIdx>=facts.length){this.hidden=true}
+    else this.textContent=factIdx===facts.length-1?'One more':'Next fact';
+  });
+  $('qcopy').addEventListener('click',function(){
+    var txt='I scored '+score+'/'+Q.length+' on the Sharks Need Us quiz ('+$('qrank').textContent+'). Reckon you can beat me?';
+    var b=this;
+    function done(){b.textContent='Copied!';setTimeout(function(){b.textContent='Copy my score'},1800)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,function(){fallback()})}else fallback();
+    function fallback(){var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy');done()}catch(e){b.textContent='Select and copy: '+txt}document.body.removeChild(t)}
+  });
+  $('qagain').addEventListener('click',function(){res.hidden=true;start.hidden=false;start.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'})});
+
+  /* confetti */
+  var cv=$('confetti'),ctx=cv.getContext('2d'),parts=[],raf=null;
+  function size(){var r=cv.parentNode.getBoundingClientRect();cv.width=r.width;cv.height=r.height}
+  function burst(n){
+    if(RM)return;size();
+    var cr=card.hidden?res.getBoundingClientRect():card.getBoundingClientRect(),pr=cv.getBoundingClientRect();
+    var cx=cr.left-pr.left+cr.width/2,cy=cr.top-pr.top+Math.min(cr.height/2,160);
+    var cols=['#f0b35c','#5fc1df','#2e8b5e','#ffffff','#0d6b8a'];
+    for(var k=0;k<n;k++)parts.push({x:cx,y:cy,vx:(Math.random()-.5)*14,vy:-Math.random()*12-3,g:.45,r:Math.random()*6+3,c:cols[k%cols.length],a:1,rot:Math.random()*6,vr:(Math.random()-.5)*.3});
+    if(!raf)raf=requestAnimationFrame(step);
+  }
+  function step(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    for(var k=parts.length-1;k>=0;k--){var p=parts[k];p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.vx*=.98;p.a-=.012;p.rot+=p.vr;
+      if(p.a<=0||p.y>cv.height){parts.splice(k,1);continue}
+      ctx.save();ctx.globalAlpha=p.a;ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*.6);ctx.restore()}
+    if(parts.length){raf=requestAnimationFrame(step)}else{raf=null;ctx.clearRect(0,0,cv.width,cv.height)}
+  }
+})();
+</script>
+
+<section class="band">
+  <div class="inner">
+    <span class="eyebrow">What you can do</span>
+    <h2 style="margin-top:.6rem">You don't need a boat. Most of this happens at the shops.</h2>
+    <div class="help">
+      <div class="act"><h3>Stop buying shark without realising</h3><p>Shark turns up in loads of things that don't say shark on the label.</p><ul><li><b>Rock salmon, huss, flake, rigg</b> on a chip shop menu are all shark (usually spiny dogfish).</li><li><b>Squalene / squalane</b> in moisturisers and sunscreens is often shark liver oil. Look for "plant-derived".</li><li><b>Shark cartilage</b> pills do nothing for your joints.</li><li>Shark fin soup, obviously. Even at weddings.</li></ul></div>
+      <div class="act"><h3>Buy fish that didn't cost a shark</h3><p>Being caught by accident is the big killer, so how your tuna was caught matters more than whether you eat it.</p><ul><li>Choose <b>pole-and-line</b> or <b>troll-caught</b> tuna over longline.</li><li>Use the Marine Conservation Society's <b>Good Fish Guide</b> before you shop.</li><li>Skip bottom-trawled fish if you can. It's what's finishing off the angelshark.</li></ul></div>
+      <div class="act"><h3>Help the people doing the hard work</h3><p>Small charities do loads with not very much.</p><ul><li>Join or donate to the <b>Shark Trust</b> (UK) or <b>Bite-Back</b>, which campaigns to get shark off restaurant menus.</li><li>Sign petitions for fin trade bans and new marine protected areas. The UK banned fin imports in 2023 because enough people made a fuss.</li><li>Write to your MP about fishing rules. Hardly anyone does, so it actually counts.</li></ul></div>
+      <div class="act"><h3>Change what people think</h3><p>Sharks get killed because people are scared of them and nobody minds. We can fix the second bit.</p><ul><li>Tell people the real numbers. About five people a year in the whole world, versus around a hundred million sharks.</li><li>If you dive or snorkel, go with companies that don't feed or touch the animals, and report what you see to the Shark Trust or <b>eOceans</b>.</li><li>If you fish, let sharks and rays go, and cut the line close if you can't get the hook out.</li></ul></div>
+    </div>
+    <div class="pledge" id="pledge">
+      <b id="pledgetext">Tap anything above you're up for doing</b>
+      <div class="pbar"><i id="pledgebar"></i></div>
+      <div class="msg" id="pledgemsg">Every tick is one more person on the sharks' side.</div>
+    </div>
+    <div class="orgs">
+      <span class="eyebrow">Good places to start</span>
+      <div><a href="https://www.sharktrust.org/">Shark Trust</a> <span>UK charity, runs the Great Eggcase Hunt and shark sighting records</span></div>
+      <div><a href="https://www.bite-back.com/">Bite-Back</a> <span>Campaigns against shark fin and shark meat on UK menus</span></div>
+      <div><a href="https://www.mcsuk.org/goodfishguide/">Good Fish Guide</a> <span>Marine Conservation Society's traffic-light ratings for seafood</span></div>
+      <div><a href="https://www.iucnredlist.org/">IUCN Red List</a> <span>The official status of every assessed shark species</span></div>
+      <div><a href="https://www.sharkstewards.org/">Shark Stewards</a> <span>US-based, focused on ending the fin trade</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="inner">
+    <b style="font-family:var(--display)">Where I got the numbers from</b>
+    <ol>
+      <li>Dulvy et al., 2021, <i>Current Biology</i>: 37% of shark and ray species threatened with extinction (IUCN global assessment).</li>
+      <li>Worm et al., 2013, <i>Marine Policy</i>: 63 to 273 million sharks killed per year, best estimate around 100 million.</li>
+      <li>Pacoureau et al., 2021, <i>Nature</i>: 71% decline in oceanic sharks and rays since 1970.</li>
+      <li>Myers et al., 2007, <i>Science</i>: loss of large sharks, cownose ray boom and scallop fishery collapse off the US east coast.</li>
+      <li>Vianna et al., 2012: lifetime value of a reef shark to Palau's dive tourism.</li>
+      <li>International Shark Attack File (Florida Museum): annual unprovoked fatalities.</li>
+      <li>Nielsen et al., 2016, <i>Science</i>: Greenland shark age and maturity.</li>
+    </ol>
+  </div>
+</footer>
+
+<canvas class="sea" id="sea" aria-hidden="true"></canvas>
+<canvas class="burst" id="burstc" aria-hidden="true"></canvas>
+<div class="gauge" id="gauge" aria-hidden="true"><span>Depth</span><div class="track"><div class="fill" id="gfill"></div><div class="fin" id="gfin"><svg viewBox="0 0 24 24"><path d="M3 18 C6 10 10 6 14 4 C13 9 14 13 21 18 Z" fill="#0d6b8a"/></svg></div></div><b id="gdepth">0 m</b><span id="gzone">Surface</span></div>
+<button class="totop" id="totop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V4M5 11l7-7 7 7"/></svg></button>
+
+<script>
+(function(){
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(id){return document.getElementById(id)};
+
+  /* scroll reveal */
+  var targets=document.querySelectorAll('.band > .inner > *, .job, .threat, .card, .act, .fact-never');
+  if('IntersectionObserver' in window && !RM){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    targets.forEach(function(el,idx){ if(el.getBoundingClientRect().top<innerHeight)return; el.classList.add('rv'); el.style.transitionDelay=((idx%4)*70)+'ms'; io.observe(el)});
+  }
+
+  /* counters */
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var end=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';
+    if(RM){el.textContent=pre+end+suf;return}
+    var t0=null,dur=1400;
+    function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/dur);k=1-Math.pow(1-k,3);el.textContent=pre+Math.round(end*k)+suf;if(k<1)requestAnimationFrame(f)}
+    requestAnimationFrame(f);
+  });
+
+  /* progress, gauge, back to top */
+  var prog=$('progress'),gfill=$('gfill'),gfin=$('gfin'),gdepth=$('gdepth'),gzone=$('gzone'),totop=$('totop');
+  var zones=[[0,'Surface'],[.12,'Shallows'],[.3,'The reef'],[.48,'Open water'],[.62,'The deep'],[.8,'Back up'],[.95,'Shore']];
+  function onScroll(){
+    var h=document.documentElement,max=h.scrollHeight-innerHeight,k=max>0?h.scrollTop/max:0;
+    prog.style.width=(k*100)+'%';
+    gfill.style.height=(k*100)+'%';gfin.style.top=(k*100)+'%';
+    gdepth.textContent=Math.round(k*1000)+' m';
+    var z='Surface';for(var j=0;j<zones.length;j++)if(k>=zones[j][0])z=zones[j][1];gzone.textContent=z;
+    totop.classList.toggle('show',h.scrollTop>600);
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  totop.addEventListener('click',function(){scrollTo({top:0,behavior:RM?'auto':'smooth'})});
+
+  /* bubbles everywhere */
+  function bubbleField(cv,opts){
+    if(!cv||RM)return null;
+    var ctx=cv.getContext('2d'),bs=[],host=opts.host||cv.parentNode,n=opts.n||30,col=opts.col,mouse={x:-1,y:-1},pops=[];
+    function size(){cv.width=opts.fixed?innerWidth:host.clientWidth;cv.height=opts.fixed?innerHeight:host.clientHeight}
+    size();addEventListener('resize',size);
+    function mk(fresh){return {x:Math.random(),y:fresh?1.05:Math.random(),r:Math.random()*(opts.maxr||6)+2,s:Math.random()*.45+.12,w:Math.random()*6.28}}
+    for(var k=0;k<n;k++)bs.push(mk(false));
+    if(opts.fixed){addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY},{passive:true})}
+    (function draw(t){
+      ctx.clearRect(0,0,cv.width,cv.height);ctx.lineWidth=1.2;
+      for(var k=0;k<bs.length;k++){var b=bs[k];b.y-=b.s/700;if(b.y<-.05){bs[k]=mk(true);continue}
+        var x=b.x*cv.width+Math.sin(t/900+b.w)*9,y=b.y*cv.height;
+        if(opts.fixed&&mouse.x>=0){var dx=x-mouse.x,dy=y-mouse.y;if(dx*dx+dy*dy<(b.r+14)*(b.r+14)){pops.push({x:x,y:y,r:b.r,a:1});bs[k]=mk(true);continue}}
+        ctx.strokeStyle=col;ctx.beginPath();ctx.arc(x,y,b.r,0,6.28);ctx.stroke();
+        ctx.fillStyle=col;ctx.beginPath();ctx.arc(x-b.r*.35,y-b.r*.35,b.r*.22,0,6.28);ctx.fill()}
+      for(var j=pops.length-1;j>=0;j--){var p=pops[j];p.r+=1.6;p.a-=.08;if(p.a<=0){pops.splice(j,1);continue}
+        ctx.globalAlpha=p.a;ctx.strokeStyle=col;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);ctx.stroke();ctx.globalAlpha=1}
+      requestAnimationFrame(draw);
+    })(0);
+  }
+  bubbleField($('bubbles'),{n:28,col:'rgba(13,107,138,.3)'});
+  bubbleField($('sea'),{n:34,col:'rgba(13,107,138,.22)',fixed:true,maxr:7});
+  bubbleField($('deepsea'),{n:40,col:'rgba(230,241,244,.28)',maxr:5});
+
+  /* click bursts */
+  var bc=$('burstc');
+  if(bc&&!RM){
+    var bctx=bc.getContext('2d'),bb=[],braf=null;
+    function bsize(){bc.width=innerWidth;bc.height=innerHeight}bsize();addEventListener('resize',bsize);
+    function spawn(x,y){for(var k=0;k<14;k++)bb.push({x:x+(Math.random()-.5)*20,y:y+(Math.random()-.5)*10,vx:(Math.random()-.5)*2.4,vy:-(Math.random()*3+1.5),r:Math.random()*5+2,a:1});if(!braf)braf=requestAnimationFrame(bstep)}
+    function bstep(){bctx.clearRect(0,0,bc.width,bc.height);bctx.lineWidth=1.3;bctx.strokeStyle='rgba(95,193,223,.9)';
+      for(var k=bb.length-1;k>=0;k--){var b=bb[k];b.x+=b.vx;b.y+=b.vy;b.vy-=.05;b.a-=.018;if(b.a<=0){bb.splice(k,1);continue}
+        bctx.globalAlpha=b.a;bctx.beginPath();bctx.arc(b.x,b.y,b.r,0,6.28);bctx.stroke()}
+      bctx.globalAlpha=1;if(bb.length)braf=requestAnimationFrame(bstep);else{braf=null;bctx.clearRect(0,0,bc.width,bc.height)}}
+    addEventListener('pointerdown',function(e){spawn(e.clientX,e.clientY)},{passive:true});
+  }
+
+  /* chain */
+  var chain=$('chain'),cbtn=$('chainbtn'),cfile=$('casefile');
+  if(chain){
+    var links=chain.querySelectorAll('.link'),ci=1;
+    cbtn.addEventListener('click',function(){
+      if(ci<links.length){
+        var l=links[ci];l.hidden=false;l.classList.add('pop');void l.offsetWidth;l.classList.remove('pop');
+        setTimeout(function(){l.classList.add('lit')},350);
+        ci++;
+        if(ci===links.length)cbtn.innerHTML='Has this actually happened? <span aria-hidden="true">&rarr;</span>';
+      }else{
+        cfile.hidden=false;cfile.classList.add('rv');void cfile.offsetWidth;cfile.classList.add('in');cbtn.hidden=true;
+        cfile.scrollIntoView({behavior:RM?'auto':'smooth',block:'nearest'});
+      }
+    });
+  }
+
+  /* threats */
+  var threats=document.querySelectorAll('.threat'),opened={},pips=document.querySelectorAll('#tracker .pip'),ttext=$('trackertext');
+  threats.forEach(function(b,idx){
+    b.addEventListener('click',function(){
+      var open=b.classList.toggle('open');b.setAttribute('aria-expanded',open);
+      b.querySelector('.hint').textContent=open?'Got it':'Tap to uncover';
+      if(open&&!opened[idx]){opened[idx]=true;pips[idx].classList.add('on');
+        var n=Object.keys(opened).length;ttext.textContent=n<6?n+' of 6 uncovered':'All 6 uncovered. Now you know what we\u2019re up against.';
+        if(n===6)ttext.classList.add('done');}
+    });
+  });
+
+  /* slow bars */
+  var slow=$('slow');
+  if(slow){ if('IntersectionObserver' in window&&!RM){var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){slow.classList.add('go');so.disconnect()}})},{threshold:.3});so.observe(slow)} else slow.classList.add('go') }
+
+  /* species flip */
+  document.querySelectorAll('.card .flip').forEach(function(f){
+    var c=f.parentNode;
+    function go(){c.classList.toggle('flipped')}
+    f.addEventListener('click',go);
+    f.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});
+  });
+
+  /* pledges */
+  var items=document.querySelectorAll('.act li'),ptext=$('pledgetext'),pbar=$('pledgebar'),pmsg=$('pledgemsg'),KEY='snu-pledges';
+  var saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){}
+  function update(){
+    var n=0;items.forEach(function(li){if(li.classList.contains('on'))n++});
+    pbar.style.width=(n/items.length*100)+'%';
+    ptext.textContent=n===0?'Tap anything above you\u2019re up for doing':'You\u2019ve pledged '+n+' thing'+(n===1?'':'s');
+    pmsg.textContent=n===0?'Every tick is one more person on the sharks\u2019 side.':n<3?'Nice start. A couple more and you\u2019re properly on the team.':n<7?'That\u2019s a proper shark ally. Tell someone else about this page.':'You\u2019re basically Steve Backshall now. Thank you.';
+  }
+  items.forEach(function(li,idx){
+    if(saved[idx])li.classList.add('on');
+    li.addEventListener('click',function(){li.classList.toggle('on');saved[idx]=li.classList.contains('on');try{localStorage.setItem(KEY,JSON.stringify(saved))}catch(e){};update()});
+  });
+  update();
+})();
+</script>
+
+
+</body>
+</html>

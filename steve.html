@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Hero: Steve Backshall | Sharks Need Us</title>
+<link rel="icon" type="image/png" href="img/logo-hammerhead.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+:root{
+  --bg:#f2f6f7;--bg-2:#e2ecef;--surface:#ffffff;--fg:#10242c;--muted:#4f666e;--line:#c9d8dd;
+  --accent:#0d6b8a;--accent-2:#f0b35c;--danger:#c2452b;--ok:#2e8b5e;--deep:#06232f;--deep-fg:#e6f1f4;--deep-muted:#9db7c0;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--body:"Lora",Georgia,"Times New Roman",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0a1b22;--bg-2:#0f262f;--surface:#132e38;--fg:#e6f1f4;--muted:#9db7c0;--line:#244852;--accent:#5fc1df;--accent-2:#f3c377;--danger:#ff7a5c;--ok:#5ccf93;--deep:#03151d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a1b22;--bg-2:#0f262f;--surface:#132e38;--fg:#e6f1f4;--muted:#9db7c0;--line:#244852;--accent:#5fc1df;--accent-2:#f3c377;--danger:#ff7a5c;--ok:#5ccf93;--deep:#03151d;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.4rem,7vw,4.8rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:800;letter-spacing:-.015em}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+.band{padding-block:4rem;position:relative;z-index:1}
+.inner{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--display);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.lede{font-size:1.18rem;max-width:62ch;color:var(--muted)}
+.prose{max-width:66ch}.prose p+p{margin-top:1rem}
+.logobar{padding-block:1.1rem;background:#06232f;position:sticky;top:env(safe-area-inset-top,0px);z-index:50}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:#06232f}
+.logobar-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:1rem;text-decoration:none;color:#e6f1f4;width:fit-content}
+.logo img{height:52px;width:auto}
+.logo .lname{font-family:var(--display);font-weight:800;font-size:1.25rem;line-height:1;letter-spacing:-.02em;text-transform:uppercase}
+.logo .lname span{color:#5fc1df}
+.logo .lslogan{font-family:var(--body);font-style:italic;font-size:.82rem;color:#9db7c0;margin-top:.3rem}
+.back{font-family:var(--display);font-weight:700;font-size:.85rem;color:#e6f1f4;text-decoration:none;border:2px solid #5fc1df;padding:.45rem .9rem;border-radius:999px;display:inline-flex;align-items:center;gap:.4rem}
+.back:hover{background:#5fc1df;color:#06232f}
+.hero{background:linear-gradient(180deg,var(--accent-2),#e9a847 70%,var(--bg) 70.01%);padding-block:3rem 0;position:relative;z-index:1;overflow:hidden}
+.hero .inner{display:grid;gap:1.4rem}
+.hero .eyebrow{color:#06232f}
+.hero h1{color:#06232f;max-width:16ch}
+.hero .lede{color:#2b2a22;max-width:60ch}
+.hero-img{margin-top:1.5rem;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1.5rem;display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;box-shadow:0 20px 40px rgba(0,0,0,.12)}
+.hero-img img{max-width:100%;height:auto;max-height:200px}
+.hero-img blockquote{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(1.2rem,2.6vw,1.7rem);line-height:1.25}
+.hero-img blockquote::before{content:"\201C";color:var(--accent-2)}.hero-img blockquote::after{content:"\201D";color:var(--accent-2)}
+.hero-img cite{display:block;font-style:normal;font-size:.95rem;color:var(--muted);margin-top:.6rem}
+@media (max-width:700px){.hero-img{grid-template-columns:1fr}.hero-img img{max-height:140px;justify-self:center}}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.5rem}
+.fact{border-top:3px solid var(--accent);padding-top:.7rem}
+.fact b{display:block;font-family:var(--display);font-size:1.9rem;font-weight:800;line-height:1.05}
+.fact span{font-size:.92rem;color:var(--muted)}
+/* timeline */
+.tl{position:relative;margin-top:2rem;max-width:760px;display:grid;gap:0}
+.tl::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:3px;background:var(--line)}
+.ev{display:grid;grid-template-columns:26px 1fr;gap:1rem;padding-block:.9rem;cursor:pointer}
+.ev .dot{width:26px;height:26px;border-radius:50%;border:3px solid var(--accent);background:var(--bg);transition:background .3s,transform .3s;position:relative;z-index:1}
+.ev.open .dot{background:var(--accent);transform:scale(1.15)}
+.ev .yr{font-family:var(--display);font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;font-size:.95rem}
+.ev h3{margin-top:.1rem}
+.ev .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.2,.7,.2,1)}
+.ev .more>p{overflow:hidden;min-height:0;color:var(--muted);font-size:1rem}
+.ev.open .more{grid-template-rows:1fr}
+.ev .hint{font-family:var(--display);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}
+.ev.open .hint{display:none}
+/* deep */
+.deep{background:var(--deep);color:var(--deep-fg);overflow:hidden}
+.deep .eyebrow{color:var(--accent-2)}
+.deep .lede{color:var(--deep-muted)}
+.deep .inner{position:relative;z-index:1}
+.deepsea{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.sharkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-top:2rem}
+.sg{border:1px solid rgba(255,255,255,.14);padding:1.2rem;display:grid;gap:.5rem;transition:transform .25s,border-color .25s}
+.sg:hover{transform:translateY(-4px);border-color:var(--accent-2)}
+.sg h3{color:var(--deep-fg)}.sg p{color:var(--deep-muted);font-size:1rem}
+.sg .n{font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--accent-2);line-height:1}
+/* loves */
+.loves{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2rem}
+.love{padding-top:1rem;border-top:3px solid var(--accent-2);display:grid;gap:.5rem}
+.love p{color:var(--muted);font-size:1rem}
+.orgs{margin-top:2rem;display:grid;gap:.6rem}
+.orgs a{font-family:var(--display);font-weight:700;text-decoration:none;border-bottom:2px solid currentColor}
+.orgs span{color:var(--muted);font-size:.95rem}
+.books{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem}
+.book{background:var(--surface);border:1px solid var(--line);padding:1rem 1.1rem;display:grid;gap:.25rem}
+.book b{font-family:var(--display)}.book span{font-size:.92rem;color:var(--muted)}
+.cta{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--display);font-weight:800;font-size:1.05rem;padding:.8rem 1.4rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:999px;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.gold{background:var(--accent-2);color:#10242c}
+footer{padding-block:2.5rem 3rem;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted);position:relative;z-index:1}
+footer ul{padding-left:1.2rem;margin:.5rem 0 0}
+.sea{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.burst{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:70}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px}
+</style>
+</head>
+<body>
+<canvas class="sea" id="sea" aria-hidden="true"></canvas>
+<canvas class="burst" id="burstc" aria-hidden="true"></canvas>
+
+<div class="logobar"><div class="inner logobar-inner"><a class="logo" href="index.html"><img src="img/logo-hammerhead.png" alt="Scalloped hammerhead shark"><div><div class="lname">Sharks Need <span>Us</span></div><div class="lslogan">Older than trees. Running out of time.</div></div></a><a class="back" href="index.html">&larr; Back to the sharks</a></div></div>
+
+<header class="hero">
+  <div class="inner">
+    <span class="eyebrow">My hero</span>
+    <h1>Steve Backshall, the man who made me love sharks.</h1>
+    <p class="lede">Three years ago I watched him swim next to a great white with no cage, looking completely calm, and something in my brain just went "oh". Sharks weren't the monsters. This page is about him, and why he's the reason this website exists.</p>
+    <div class="hero-img">
+      <div><blockquote>Human beings will only ever look after the things they value. Our first battle then is to convince the world of the wonder of sharks.</blockquote><cite>Steve Backshall, when he became patron of Bite-Back in 2016</cite></div>
+      <img src="img/why-diver.png" alt="A diver swimming alongside a reef shark">
+    </div>
+  </div>
+</header>
+
+<section class="band">
+  <div class="inner">
+    <span class="eyebrow">Who he is</span>
+    <h2 style="margin-top:.6rem">Explorer, presenter, shark defender.</h2>
+    <div class="prose" style="margin-top:1rem">
+      <p>Steve Backshall was born in Bagshot in Surrey in 1973 and grew up on a smallholding full of rescued animals, which probably explains a lot. He studied English and theatre at Exeter, went off to try and walk across New Guinea on his own (he didn't make it, but he got a TV job out of it), and ended up as National Geographic's "Adventurer in Residence" at 25.</p>
+      <p>Most people my age know him from <i>Deadly 60</i>, which started in 2008 and is still the best wildlife programme ever made, I will not be taking questions. But he's also led proper expeditions to places nobody had been, climbed mountains, kayaked rivers, written loads of books, done <i>Strictly</i>, and got an MBE for his conservation work. He's married to Helen Glover, who has two Olympic gold medals for rowing, and they live in Cornwall with their three kids.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>2008</b><span>Deadly 60 first aired on CBBC</span></div>
+      <div class="fact"><b>2 BAFTAs</b><span>in 2011, for presenting and for the series</span></div>
+      <div class="fact"><b>MBE</b><span>in the 2020 New Year Honours, for charity and conservation</span></div>
+      <div class="fact"><b>10+</b><span>books, from Deadly Diaries to Deep Blue</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="background:var(--bg-2)">
+  <div class="inner">
+    <span class="eyebrow">His story so far</span>
+    <h2 style="margin-top:.6rem">Tap a year to see what happened.</h2>
+    <div class="tl" id="tl">
+      <div class="ev"><div class="dot"></div><div><div class="yr">1973</div><h3>Born in Bagshot, Surrey</h3><div class="hint">Tap for more</div><div class="more"><p>Grew up surrounded by rescued animals on his family's smallholding. So, basically, he was always going to end up doing this.</p></div></div></div>
+      <div class="ev"><div class="dot"></div><div><div class="yr">1997</div><h3>Tries to walk across New Guinea alone</h3><div class="hint">Tap for more</div><div class="more"><p>He didn't manage the whole thing, but he filmed a pilot on the way that got him noticed. A year later National Geographic made him their "Adventurer in Residence".</p></div></div></div>
+      <div class="ev"><div class="dot"></div><div><div class="yr">2003</div><h3>Joins The Really Wild Show</h3><div class="hint">Tap for more</div><div class="more"><p>His first big BBC job, presenting the show that had been getting kids into wildlife since the 80s. It ran for four more years.</p></div></div></div>
+      <div class="ev"><div class="dot"></div><div><div class="yr">2008</div><h3>Deadly 60 begins</h3><div class="hint">Tap for more</div><div class="more"><p>Sixty of the deadliest animals on Earth, with Steve getting as close as he possibly could to every one of them. It won two BAFTAs in 2011 and spawned Deadly Pole to Pole, Deadly Dinosaurs and loads more.</p></div></div></div>
+      <div class="ev"><div class="dot"></div><div><div class="yr">2009</div><h3>Into the volcano</h3><div class="hint">Tap for more</div><div class="more"><p>For Lost Land of the Volcano he led the first western expedition into the crater of Mount Bosavi in Papua New Guinea, where the team found animals nobody had ever recorded before, including a giant rat.</p></div></div></div>
+      <div class="ev"><div class="dot"></div><div><div class="yr">2014</div><h3>Strictly, and a mountain</h3><div class="hint">Tap for more</div><div class="more"><p>He did Strictly Come Dancing (got to week nine) and in the same year climbed Mount Asgard on Baffin Island in one 27-hour push. Normal year.</p></div></div></div>
+      <div class="ev"><div class="dot"></div><div><div class="yr">2016</div><h3>Becomes patron of Bite-Back</h3><div class="hint">Tap for more</div><div class="more"><p>He put his name behind the UK charity that's fighting to get shark off menus and shark fins out of the country. This is also the year he married Helen Glover, in Cornwall.</p></div></div></div>
+      <div class="ev"><div class="dot"></div><div><div class="yr">2019</div><h3>Dives live with sharks on Blue Planet Live</h3><div class="hint">Tap for more</div><div class="more"><p>Live on BBC One, off Bimini in the Bahamas, surrounded by hammerheads, tiger sharks, bull sharks and reef sharks. No cage. Millions of people watching. Nobody got eaten.</p></div></div></div>
+      <div class="ev"><div class="dot"></div><div><div class="yr">2020</div><h3>Gets an MBE</h3><div class="hint">Tap for more</div><div class="more"><p>In the New Year Honours, for services to charity and wildlife conservation. The same year he was named Explorer of the Year by the Scientific Exploration Society.</p></div></div></div>
+      <div class="ev"><div class="dot"></div><div><div class="yr">2021</div><h3>Shark with Steve Backshall</h3><div class="hint">Tap for more</div><div class="more"><p>A whole series just about sharks, on Sky Nature. If you only watch one thing from this page, make it this.</p></div></div></div>
+      <div class="ev"><div class="dot"></div><div><div class="yr">2023</div><h3>Publishes Deep Blue</h3><div class="hint">Tap for more</div><div class="more"><p>A book about his life in the ocean. It's on my shelf. There are a lot of sharks in it.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band deep">
+  <canvas class="deepsea" id="deepsea" aria-hidden="true"></canvas>
+  <div class="inner">
+    <span class="eyebrow">Steve and sharks</span>
+    <h2 style="margin-top:.6rem">He's been in the water with nearly all of them.</h2>
+    <p class="lede" style="margin-top:1rem">This is the bit that got me. He doesn't just talk about sharks from a boat. He gets in.</p>
+    <div class="sharkgrid">
+      <div class="sg"><span class="n">No cage</span><h3>Great whites, cage-free</h3><p>In Swimming with Monsters he swam next to great white sharks with nothing between him and them. He's done it since too. He says it was "a beautiful, enriching experience", which is not what most people would say.</p></div>
+      <div class="sg"><span class="n">Bitten</span><h3>Once, in a chain-mail suit</h3><p>Filming Deadly Pole to Pole a shark did bite him, but he was wearing a chain-mail shark suit so it didn't get through. He carried on filming. Obviously.</p></div>
+      <div class="sg"><span class="n">5 species</span><h3>On Deadly 60 alone</h3><p>Great white, bull shark, great hammerhead, mako and tiger shark, all outside the cage. Those are some of the sharks people are most scared of, and he showed millions of kids they weren't monsters.</p></div>
+      <div class="sg"><span class="n">3 charities</span><h3>Patron for sharks and rays</h3><p>He's patron of Bite-Back, the Shark Trust and the Manta Trust. That's the fin trade, UK shark science and manta rays all covered.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner">
+    <span class="eyebrow">Why he's my hero</span>
+    <h2 style="margin-top:.6rem">Three things I've learnt from him.</h2>
+    <div class="loves">
+      <div class="love"><h3>Being scared isn't a reason not to look closer</h3><p>He's honest about the animals being dangerous. He just doesn't let that be the end of the story. The more you learn about a shark, the less scary it gets and the more amazing it gets.</p></div>
+      <div class="love"><h3>Say the true thing, even if it's not the fun thing</h3><p>He calls shark finning "the most baffling and frustrating cause in conservation". He could just do the exciting diving bits and leave it there. He doesn't.</p></div>
+      <div class="love"><h3>Actually do something</h3><p>Patron of charities, raising money, going on telly to talk about fin bans. He and Helen raised £360,000 for the World Land Trust in one year. This website is my version of that. Much smaller, but it's a start.</p></div>
+    </div>
+    <div class="books">
+      <div class="book"><b>Deep Blue: My Ocean Journeys</b><span>2023. His life in the sea, sharks included.</span></div>
+      <div class="book"><b>Looking for Adventure</b><span>2011. How he got started, New Guinea and all.</span></div>
+      <div class="book"><b>Deadly Diaries</b><span>2012. Behind the scenes of Deadly 60.</span></div>
+      <div class="book"><b>The Falcon Chronicles</b><span>Four adventure novels, starting with Tiger Wars.</span></div>
+    </div>
+    <div class="orgs">
+      <span class="eyebrow">Find out more</span>
+      <div><a href="https://www.bite-back.com/">Bite-Back</a> <span>The shark charity he's patron of</span></div>
+      <div><a href="https://www.sharktrust.org/">Shark Trust</a> <span>Also patron</span></div>
+      <div><a href="https://www.mantatrust.org/">Manta Trust</a> <span>Also patron (rays are shark cousins)</span></div>
+    </div>
+    <div class="cta">
+      <a class="btn gold" href="index.html#quiz">Take the shark quiz</a>
+      <a class="btn" href="index.html">Back to the sharks</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="inner">
+    <b style="font-family:var(--display)">Where I got this from</b>
+    <ul>
+      <li>Bite-Back, "Steve Backshall becomes Bite-Back patron", 13 October 2016 (the quote at the top).</li>
+      <li>Wikipedia, "Steve Backshall", for dates, programmes, expeditions, honours and charity roles.</li>
+      <li>BBC, Blue Planet Live (2019) and Deadly 60 (CBBC).</li>
+    </ul>
+    <p style="margin-top:1rem">This page is a fan page. Steve Backshall hasn't seen it and isn't involved. Created by Harriet Jackson.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(id){return document.getElementById(id)};
+  /* reveal */
+  var targets=document.querySelectorAll('.band > .inner > *, .ev, .sg, .love, .book, .fact');
+  if('IntersectionObserver' in window&&!RM){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    targets.forEach(function(el,idx){if(el.getBoundingClientRect().top<innerHeight)return;el.classList.add('rv');el.style.transitionDelay=((idx%4)*70)+'ms';io.observe(el)});
+  }
+  /* timeline */
+  document.querySelectorAll('.ev').forEach(function(ev){ev.setAttribute('tabindex','0');ev.setAttribute('role','button');
+    function go(){ev.classList.toggle('open')}
+    ev.addEventListener('click',go);ev.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+  /* bubbles */
+  function bubbleField(cv,opts){
+    if(!cv||RM)return;
+    var ctx=cv.getContext('2d'),bs=[],host=opts.host||cv.parentNode,n=opts.n||30,col=opts.col,mouse={x:-1,y:-1},pops=[];
+    function size(){cv.width=opts.fixed?innerWidth:host.clientWidth;cv.height=opts.fixed?innerHeight:host.clientHeight}
+    size();addEventListener('resize',size);
+    function mk(fresh){return {x:Math.random(),y:fresh?1.05:Math.random(),r:Math.random()*(opts.maxr||6)+2,s:Math.random()*.45+.12,w:Math.random()*6.28}}
+    for(var k=0;k<n;k++)bs.push(mk(false));
+    if(opts.fixed){addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY},{passive:true})}
+    (function draw(t){
+      ctx.clearRect(0,0,cv.width,cv.height);ctx.lineWidth=1.2;
+      for(var k=0;k<bs.length;k++){var b=bs[k];b.y-=b.s/700;if(b.y<-.05){bs[k]=mk(true);continue}
+        var x=b.x*cv.width+Math.sin(t/900+b.w)*9,y=b.y*cv.height;
+        if(opts.fixed&&mouse.x>=0){var dx=x-mouse.x,dy=y-mouse.y;if(dx*dx+dy*dy<(b.r+14)*(b.r+14)){pops.push({x:x,y:y,r:b.r,a:1});bs[k]=mk(true);continue}}
+        ctx.strokeStyle=col;ctx.beginPath();ctx.arc(x,y,b.r,0,6.28);ctx.stroke();
+        ctx.fillStyle=col;ctx.beginPath();ctx.arc(x-b.r*.35,y-b.r*.35,b.r*.22,0,6.28);ctx.fill()}
+      for(var j=pops.length-1;j>=0;j--){var p=pops[j];p.r+=1.6;p.a-=.08;if(p.a<=0){pops.splice(j,1);continue}
+        ctx.globalAlpha=p.a;ctx.strokeStyle=col;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);ctx.stroke();ctx.globalAlpha=1}
+      requestAnimationFrame(draw);
+    })(0);
+  }
+  bubbleField($('sea'),{n:34,col:'rgba(13,107,138,.22)',fixed:true,maxr:7});
+  bubbleField($('deepsea'),{n:40,col:'rgba(230,241,244,.28)',maxr:5});
+  var bc=$('burstc');
+  if(bc&&!RM){
+    var bctx=bc.getContext('2d'),bb=[],braf=null;
+    function bsize(){bc.width=innerWidth;bc.height=innerHeight}bsize();addEventListener('resize',bsize);
+    function spawn(x,y){for(var k=0;k<14;k++)bb.push({x:x+(Math.random()-.5)*20,y:y+(Math.random()-.5)*10,vx:(Math.random()-.5)*2.4,vy:-(Math.random()*3+1.5),r:Math.random()*5+2,a:1});if(!braf)braf=requestAnimationFrame(bstep)}
+    function bstep(){bctx.clearRect(0,0,bc.width,bc.height);bctx.lineWidth=1.3;bctx.strokeStyle='rgba(95,193,223,.9)';
+      for(var k=bb.length-1;k>=0;k--){var b=bb[k];b.x+=b.vx;b.y+=b.vy;b.vy-=.05;b.a-=.018;if(b.a<=0){bb.splice(k,1);continue}
+        bctx.globalAlpha=b.a;bctx.beginPath();bctx.arc(b.x,b.y,b.r,0,6.28);bctx.stroke()}
+      bctx.globalAlpha=1;if(bb.length)braf=requestAnimationFrame(bstep);else{braf=null;bctx.clearRect(0,0,bc.width,bc.height)}}
+    addEventListener('pointerdown',function(e){spawn(e.clientX,e.clientY)},{passive:true});
+  }
+})();
+</script>
+</body>
+</html>
